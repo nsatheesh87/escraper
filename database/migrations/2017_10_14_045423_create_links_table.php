@@ -15,7 +15,18 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('url', 2083);
+            $table->enum('status', [0, 1, 2]);
             $table->timestamps();
+        });
+
+        Schema::create('followup-links', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->unsigned();
+            $table->string('url', 2083);
+            $table->enum('status', [0, 1, 2]);
+            $table->timestamps();
+            $table->foreign('parent_id')->references('id')->on('links');
         });
     }
 
@@ -26,6 +37,7 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('followup-links');
         Schema::dropIfExists('links');
     }
 }

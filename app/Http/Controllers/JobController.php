@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request as Request;
+use App\Link as Link;
+use App\Jobs\ScrapLinkJob;
+use Validator;
+
+class JobController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    public function show($id = '', Request $request)
+    {
+
+    }
+
+    public function scrapLinks()
+    {
+        /* $url = "http://www.compasslist.com";
+        $input = @file_get_contents($url) or die("Could not access file: $url");
+        $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>"; */
+        $urlArray = [];
+       /* if(preg_match_all("/$regexp/siU", $input, $matches, PREG_SET_ORDER)) {
+            foreach($matches as $match) {
+                $urlArray[] = $match[2];
+                // $match[2] = link address
+                // $match[3] = link text
+            }
+        } */
+
+        dd($urlArray);
+    }
+    public function create(Request $request)
+    {
+        dispatch(new ScrapLinkJob());
+
+        /* $this->validate($request, [
+            'url' => 'required|url|unique:links'
+        ]);
+
+
+        $link = Link::create($request->all());
+
+        if ($link) {
+            dispatch(new ScrapLinkJob($link));
+        }
+        return response()->json($link);
+        */
+    }
+
+    //
+}

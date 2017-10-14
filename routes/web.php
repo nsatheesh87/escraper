@@ -12,5 +12,19 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+   return $router->app->version();
 });
+
+$router->get('test', [
+    'as' => 'scrapLinks', 'uses' => 'JobController@scrapLinks'
+]);
+
+$router->post('job', [
+    'as' => 'job_create', 'uses' => 'JobController@create'
+]);
+
+$router->get('foo', function () {
+    return 'Hello World';
+});
+
+//Route::post('/job', 'JobController@create');
