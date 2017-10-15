@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request as Request;
+use App\Scraper\Services\LinkScraper;
 use App\Link as Link;
 use App\Jobs\ScrapLinkJob;
 use Validator;
@@ -24,8 +25,10 @@ class JobController extends Controller
 
     }
 
-    public function scrapLinks()
+    public function scrapLinks(LinkScraper $linkScraper)
     {
+        $links = $linkScraper->scrap();
+        dd($links);
         /* $url = "http://www.compasslist.com";
         $input = @file_get_contents($url) or die("Could not access file: $url");
         $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>"; */
@@ -42,7 +45,9 @@ class JobController extends Controller
     }
     public function create(Request $request)
     {
-        dispatch(new ScrapLinkJob());
+        //$link = Link::create($request->all());
+        $link = Link::find(1);
+        dispatch(new ScrapLinkJob($link));
 
         /* $this->validate($request, [
             'url' => 'required|url|unique:links'

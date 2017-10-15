@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
-// $app->withEloquent();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +82,8 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
-$app->register(App\Providers\ScrapServiceProvider::class);
+$app->register(App\Providers\LinkScrapServiceProvider::class);
+$app->register(App\Providers\EmailScrapServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

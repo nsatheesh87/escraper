@@ -4,7 +4,7 @@ namespace App\Scraper\Services;
 
 class EmailScraper implements ScrapServiceInterface
 {
-    public function doSomethingUseful()
+    public function scrap()
     {
         return 'Output from EmailScraper';
     }

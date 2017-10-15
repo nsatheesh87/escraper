@@ -2,7 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Scraper\Services;
+use App\Scraper\Services\EmailScraper;
 
 class EmailScrapServiceProvider extends ServiceProvider
 {
@@ -23,8 +23,8 @@ class EmailScrapServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Scraper\Services\ScrapServiceInterface', function ($app) {
-            return new Services\EmailScraper();
+        $this->app->bind('App\Scraper\Services\EmailScraper', function ($app) {
+            return new EmailScraper();
         });
     }
 }

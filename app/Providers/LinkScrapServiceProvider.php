@@ -2,7 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Scraper\Services;
+use App\Scraper\Services\LinkScraper;
 
 class LinkScrapServiceProvider extends ServiceProvider
 {
@@ -23,8 +23,8 @@ class LinkScrapServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Scraper\Services\ScrapServiceInterface', function ($app) {
-            return new Services\LinkScraper();
+        $this->app->bind('App\Scraper\Services\LinkScraper', function ($app) {
+            return new LinkScraper();
         });
     }
 }

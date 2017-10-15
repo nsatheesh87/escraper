@@ -4,5 +4,5 @@ namespace App\Scraper\Services;
 
 Interface ScrapServiceInterface
 {
-    public function doSomethingUseful();
+    public function scrap();
 }

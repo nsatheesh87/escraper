@@ -17,6 +17,7 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('url', 2083);
             $table->enum('status', [0, 1, 2]);
+            $table->enum('job_status', [0, 1, 2]);
             $table->timestamps();
         });
 

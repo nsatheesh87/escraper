@@ -10,7 +10,7 @@ use App\Link;
 use App\FollowUpLink;
 use Illuminate\Support\Facades\Log;
 
-class ScrapLinkJob implements ShouldQueue
+class ScrapEmailJob implements ShouldQueue
 {
 use InteractsWithQueue, Queueable, SerializesModels;
 
