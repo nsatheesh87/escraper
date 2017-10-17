@@ -67,6 +67,9 @@ class EmailCrawl extends Command
 
     }
 
+    /**
+     * @param $taskId
+     */
     private function processTaskStatus($taskId)
     {
         Log::info('Process task status: '. $taskId);

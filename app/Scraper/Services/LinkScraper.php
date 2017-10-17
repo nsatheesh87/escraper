@@ -4,8 +4,15 @@ namespace App\Scraper\Services;
 
 class LinkScraper implements ScrapServiceInterface
 {
+    /**
+     * @var
+     */
     protected $url;
 
+    /**
+     * @param $url
+     * @return bool
+     */
     private function isAbsolutePath($url)
     {
         if ((substr($url, 0, 7) == 'http://') || (substr($url, 0, 8) == 'https://')) {
@@ -14,6 +21,10 @@ class LinkScraper implements ScrapServiceInterface
         return false;
     }
 
+    /**
+     * @param $followupUrl
+     * @return bool
+     */
     private function isSameDomain($followupUrl)
     {
         if (parse_url($this->url, PHP_URL_HOST) !== parse_url($this->validateUrl($followupUrl), PHP_URL_HOST)) {
@@ -22,6 +33,10 @@ class LinkScraper implements ScrapServiceInterface
         return true;
     }
 
+    /**
+     * @param $url
+     * @return string
+     */
     private function validateUrl($url)
     {
         if (!$this->isAbsolutePath($url)) {
@@ -29,6 +44,11 @@ class LinkScraper implements ScrapServiceInterface
         }
         return $url;
     }
+
+    /**
+     * @param string $url
+     * @return array
+     */
     public function scrap($url = '')
     {
         $this->url = $url;

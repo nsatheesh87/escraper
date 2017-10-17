@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request as Request;
-use App\Scraper\Services\LinkScraper;
-use App\Scraper\Services\EmailScraper;
 use App\Task as Task;
 use App\Link as Link;
 use App\Jobs\ScrapLinkJob;
-use App\Jobs\ScrapEmailJob;
 use Validator;
 use DB;
 
@@ -25,6 +22,9 @@ class TaskController extends Controller
         $this->status = ['0' => 'Waiting', '1' => 'Processing', '2' => 'completed'];
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list()
     {
         $tasks = Task::get();
@@ -36,6 +36,11 @@ class TaskController extends Controller
         return response()->json($tasks);
 
     }
+
+    /**
+     * @param $taskId
+     * @return array
+     */
     private function crawledEmails($taskId)
     {
         $data = DB::table('crawl_links')->where('crawl_links.task_id', '=', $taskId)
@@ -49,6 +54,10 @@ class TaskController extends Controller
         return $response;
     }
 
+    /**
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id = '')
     {
         if(!empty($id)) {
@@ -70,6 +79,10 @@ class TaskController extends Controller
         return response()->json('job_id parameter is missing or invalid');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request)
     {
         $this->validate($request, [

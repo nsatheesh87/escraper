@@ -4,8 +4,15 @@ namespace App\Scraper\Services;
 
 class EmailScraper implements ScrapServiceInterface
 {
+    /**
+     * @var
+     */
     protected $url;
 
+    /**
+     * @param string $url
+     * @return array
+     */
     public function scrap($url = '')
     {
         $this->url = $url;
