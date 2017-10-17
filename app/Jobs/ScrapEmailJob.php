@@ -7,7 +7,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Scraper\Services\LinkScraper;
 use App\Link;
-use App\FollowUpLink;
 use Illuminate\Support\Facades\Log;
 
 class ScrapEmailJob implements ShouldQueue
@@ -31,7 +30,21 @@ use InteractsWithQueue, Queueable, SerializesModels;
      */
     public function handle(LinkScraper $linkScraper)
     {
-        Log::info('Scrap follow-up links job process initiated - Url: '.$this->link->url);
+        $url = "http://compassloft.com/careers/";
+        $input = @file_get_contents($url) or die("Could not access file: $url");
+        $regexp = "/[a-z0-9]+[_a-z0-9.-]*[a-z0-9]+@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})/i";
+        $urlArray = [];
+        if(preg_match_all($regexp, $input, $matches, PREG_SET_ORDER)) {
+            foreach($matches as $match) {
+                $urlArray[] = $match[0];
+                // $match[2] = link address
+                // $match[3] = link text
+            }
+            $urlArray = array_unique($urlArray);
+        }
+        dd($urlArray);
+
+        Log::info('Scrap email address job process initiated - Url: '.$this->link->url);
        // FollowUpLink::create(['parent_id' => '1', 'url' => 'http://www.google.com']); exit;
        /* $scrapedLinks =  $linkScraper->scrap($this->link->url);
         $formattedLinks = [];
@@ -42,7 +55,7 @@ use InteractsWithQueue, Queueable, SerializesModels;
             $formattedLinks[$sKey]['updated_at']    = date('Y-m-d H:i:s');
         }
         FollowUpLink::insert($formattedLinks); */
-        Log::info('Scrap follow-up links job process completed - Url: '. $this->link->url);
+        Log::info('Scrap email address job process completed - Url: '. $this->link->url);
     }
 
     /**

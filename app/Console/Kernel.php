@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        Commands\EmailCrawl::class
     ];
 
     /**
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command('queue:work --queue=LinkQueue --once')->withoutOverlapping()->everyMinute();
+        $schedule->command('email:crawl')->withoutOverlapping()->everyMinute();
     }
 }

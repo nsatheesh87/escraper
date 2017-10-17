@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class Email extends Model
 {
 
     /**
@@ -12,7 +12,7 @@ class Link extends Model
      *
      * @var string
      */
-    protected $table = 'crawl_links';
+    protected $table = 'crawled_emails';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +20,7 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
-        'task_id', 'url', 'status',
+        'url_id', 'email',
     ];
 
 

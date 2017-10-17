@@ -16,11 +16,19 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('test', [
-    'as' => 'scrapLinks', 'uses' => 'JobController@scrapLinks'
+    'as' => 'scrapLinks', 'uses' => 'TaskController@test'
 ]);
 
 $router->post('job', [
-    'as' => 'job_create', 'uses' => 'JobController@create'
+    'as' => 'taskCreate', 'uses' => 'TaskController@create'
+]);
+
+$router->get('jobs', [
+    'as' => 'taskShow', 'uses' => 'TaskController@list'
+]);
+
+$router->get('job/{id}/show', [
+    'as' => 'taskShow', 'uses' => 'TaskController@show'
 ]);
 
 $router->get('foo', function () {

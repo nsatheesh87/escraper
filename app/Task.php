@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FollowUpLink extends Model
+class Task extends Model
 {
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'followup-links';
+    protected $table = 'crawl_task';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +19,7 @@ class FollowUpLink extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'url', 'status',
+        'url', 'status',
     ];
 
 
